@@ -26,36 +26,31 @@ public class CoinMachineApplication {
 class CoinsController {
 
 	@PostMapping
-    public Map<String, Map<String,Long>> countOccurrences(@RequestBody Payload payload) {
-        Map<String, List<String>>peopleMap = Map.of(
+    public Map<String, Long> countOccurrences(@RequestBody Payload payload) {
+        
+		Map<String, List<String>>peopleMap = Map.of(
                 "rightPerson", payload.getRightPerson(),
                 "leftPerson", payload.getLeftPerson()
         );
+		
 
         return peopleMap.entrySet().stream()
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> countOccurrencesInList(entry.getValue())
+                        entry -> (long) countTotal(entry.getValue())+3
                 ));
 	}
 	
-	private Map<String, Long> countOccurrencesInList(List<String> list) {
-        return list.stream()
-                .collect(Collectors.groupingBy(
-                        character -> character,
-                        Collectors.counting()
-                ));
+	 private long countTotal(List<String> list) {
+        
+		 return list.stream()
+                .mapToInt(character -> character.equals("P") ? -1 : 3)
+                .sum();
     }
+	
     	
     	
-    	
-    	
-    	
-//    	List<Character> rightPersonList = payload.getRightPerson();
-//        long countRightPerson = rightPersonList.stream().filter(ch -> ch == 'P').count();
-//        
-//        countRightPerson=countRightPerson*3;
-//        return "Number of 'P' occurrences: " + countRightPerson;
+    
      
 }
 
