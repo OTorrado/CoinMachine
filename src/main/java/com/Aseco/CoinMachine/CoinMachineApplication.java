@@ -28,45 +28,68 @@ public class CoinMachineApplication {
 @RequestMapping("/coins")
 class CoinsController {
 
-    @PostMapping
+	@PostMapping
     public Map<String, Long> countOccurrences(@RequestBody Payload payload) {
-    	
-        List<String> orderOfPeople = Arrays.asList("rightPerson", "leftPerson");
-        
-        //Need to use to main order, PreviousMap didn't Maintain
+       
+        List<String> listOfPeople = Arrays.asList("rightPerson", "leftPerson");
         Map<String, Long> result = new LinkedHashMap<>();
 
-        for (String person : orderOfPeople) {
-            List<String> personList = getPersonList(payload, person);
-            long totalCount = countTotal(personList) + 3;
-            result.put(person, totalCount);
-        }
+        // Initialize counters for 'P' added by each person in the previous iteration
+        long rightPersonPCount = 0;
+        long leftPersonPCount = 0;
+        long rightPersonRCount = 0;
+        long leftPersonRCount = 0; 
 
+
+        for (String person : listOfPeople) {
+            List<String> personList = person.equals("rightPerson") ? payload.getRightPerson() : payload.getLeftPerson();
+            
+            if(person.equals("rightPerson")) {
+            	rightPersonPCount =   countCharsP(personList);
+            	rightPersonRCount = countCharsR(personList);
+            	
+            }
+            else {
+            	leftPersonPCount =  countCharsP(personList);
+            	leftPersonRCount =  countCharsR(personList);
+            }
+            
+        }
+        
+        long totalRight = countTotalChars(leftPersonPCount, rightPersonRCount, rightPersonPCount);
+        
+        long totalLeft = countTotalChars(rightPersonPCount, leftPersonRCount, leftPersonPCount);
+         
+        for(String person : listOfPeople) {
+        	long total = person.equals("rightPerson") ? totalRight : totalLeft;
+        	result.put(person, total+3);
+        }
+            
+        // Return the result map
         return result;
     }
 
-    private List<String> getPersonList(Payload payload, String person) {
-        switch (person) {
-            case "rightPerson":
-                return payload.getRightPerson();
-            case "leftPerson":
-                return payload.getLeftPerson();
-            default:
-                return Collections.emptyList();
+	private long countTotalChars(long Person1PCount, long Person2RCount, long Person2PCount) {
+		long total = 0;
+		if(Person1PCount >= Person2RCount) {
+        	total = (Person2RCount*3)-Person2PCount;	
         }
-    }
-
+        else {
+        	total = (Person1PCount*3)-Person2PCount;
+        }
+		return total;
+	}
 	
-	private long countTotal(List<String> list) {
-        
-		 return list.stream()
-                .mapToInt(character -> character.equals("P") ? -1 : 3)
-                .sum();
-    }
+	private long countCharsP(List<String> List) {
+		long countP = List.stream().filter(x -> x.equals("P")).count();
+		return countP;
+	}
 	
+	private long countCharsR(List<String> List) {
+		long countR = List.stream().filter(x -> x.equals("R")).count();
+		return countR;
+	}
     	
-    	
-    
      
 }
 
