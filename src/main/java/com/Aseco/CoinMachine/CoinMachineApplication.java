@@ -1,5 +1,8 @@
 package com.Aseco.CoinMachine;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,23 +28,36 @@ public class CoinMachineApplication {
 @RequestMapping("/coins")
 class CoinsController {
 
-	@PostMapping
+    @PostMapping
     public Map<String, Long> countOccurrences(@RequestBody Payload payload) {
+    	
+        List<String> orderOfPeople = Arrays.asList("rightPerson", "leftPerson");
         
-		Map<String, List<String>>peopleMap = Map.of(
-                "rightPerson", payload.getRightPerson(),
-                "leftPerson", payload.getLeftPerson()
-        );
-		
+        //Need to use to main order, PreviousMap didn't Maintain
+        Map<String, Long> result = new LinkedHashMap<>();
 
-        return peopleMap.entrySet().stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> (long) countTotal(entry.getValue())+3
-                ));
-	}
+        for (String person : orderOfPeople) {
+            List<String> personList = getPersonList(payload, person);
+            long totalCount = countTotal(personList) + 3;
+            result.put(person, totalCount);
+        }
+
+        return result;
+    }
+
+    private List<String> getPersonList(Payload payload, String person) {
+        switch (person) {
+            case "rightPerson":
+                return payload.getRightPerson();
+            case "leftPerson":
+                return payload.getLeftPerson();
+            default:
+                return Collections.emptyList();
+        }
+    }
+
 	
-	 private long countTotal(List<String> list) {
+	private long countTotal(List<String> list) {
         
 		 return list.stream()
                 .mapToInt(character -> character.equals("P") ? -1 : 3)
