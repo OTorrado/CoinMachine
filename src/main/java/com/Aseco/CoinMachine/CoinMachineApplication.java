@@ -32,6 +32,8 @@ class CoinsController {
     public Map<String, Long> countOccurrences(@RequestBody Payload payload) {
        
         List<String> listOfPeople = Arrays.asList("rightPerson", "leftPerson");
+        
+        //To maintain the order in result
         Map<String, Long> result = new LinkedHashMap<>();
 
         // Initialize counters for 'P' added by each person in the previous iteration
@@ -62,7 +64,7 @@ class CoinsController {
          
         for(String person : listOfPeople) {
         	long total = person.equals("rightPerson") ? totalRight : totalLeft;
-        	result.put(person, total+3);
+        	result.put(person, total);
         }
             
         // Return the result map
@@ -77,7 +79,8 @@ class CoinsController {
         else {
         	total = (Person1PCount*3)-Person2PCount;
         }
-		return total;
+		total = total +3;
+		return total < 0 ? 0 : total;
 	}
 	
 	private long countCharsP(List<String> List) {
