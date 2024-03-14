@@ -1,11 +1,11 @@
 version: "3.3"
 services:
-   gitlab:
+   asseco:
       image: 'otorradinho/coinmachine:latest'
       container_name: coinmachine
       restart: always
       volumes:
-        - ./target/CoinMachine-0.0.1-SNAPSHOT.jar:./CoinMachine.jar
+        - /Users/otorrado/Desktop/AsecoGithub/target/CoinMachine-0.0.2.jar
       hostname: 'localhost'
       ports:
         - '80:8080'
