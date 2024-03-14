@@ -1,11 +1,11 @@
 version: "3.3"
 services:
    asseco:
-      image: 'otorradinho/coinmachine:latest'
+      image: 'otorradinho/coinmachine:0.1'
       container_name: coinmachine
       restart: always
       volumes:
-        - /Users/otorrado/Desktop/AsecoGithub/target/CoinMachine-0.0.2.jar
+        - /Users/otorrado/Desktop/AsecoGithub/target/
       hostname: 'localhost'
       ports:
-        - '80:8080'
+        - '8080:80'
