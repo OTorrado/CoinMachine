@@ -4,7 +4,8 @@
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
-# documentatio
+# documentation.
+#Update Pipline
 
 name: Java CI with Maven
 
@@ -34,7 +35,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: otorradinho/coinmachine
-        tags: 0.1, latest
+        tags: 0.2, latest
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
