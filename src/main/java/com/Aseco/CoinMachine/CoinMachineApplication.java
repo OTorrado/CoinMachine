@@ -47,13 +47,13 @@ class CoinsController {
             List<String> personList = person.equals("rightPerson") ? payload.getRightPerson() : payload.getLeftPerson();
             
             if(person.equals("rightPerson")) {
-            	rightPersonPCount =   countCharsP(personList);
-            	rightPersonRCount = countCharsR(personList);
+            	rightPersonPCount =   countChars(personList,"P");
+            	rightPersonRCount = countChars(personList,"R");
             	
             }
             else {
-            	leftPersonPCount =  countCharsP(personList);
-            	leftPersonRCount =  countCharsR(personList);
+            	leftPersonPCount =  countChars(personList,"P");
+            	leftPersonRCount =  countChars(personList,"R");
             }
             
         }
@@ -83,15 +83,11 @@ class CoinsController {
 		return total < 0 ? 0 : total;
 	}
 	
-	private long countCharsP(List<String> List) {
-		long countP = List.stream().filter(x -> x.equals("P")).count();
+	private long countChars(List<String> List, String letter) {
+		long countP = List.stream().filter(x -> x.equals(letter)).count();
 		return countP;
 	}
 	
-	private long countCharsR(List<String> List) {
-		long countR = List.stream().filter(x -> x.equals("R")).count();
-		return countR;
-	}
     	
      
 }

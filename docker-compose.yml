@@ -1,7 +1,7 @@
 version: "3.3"
 services:
    asseco:
-      image: 'otorradinho/coinmachine:0.1'
+      image: 'otorradinho/coinmachine:0.2'
       container_name: coinmachine
       restart: always
       volumes:
