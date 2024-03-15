@@ -30,12 +30,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Copy settings.xml
-      run: cp config/settings.xml ~/.m2/
-    - name: Deploy
-      run: mvn clean deploy
-      env:
-        TOKEN: ${{ secrets.TOKEN }}
+    - name: Deplow
+      run: mvn clean package
+    - name: Publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: coinmachine
+        path: ./target/CoinMachine-0.0.2.jar
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
