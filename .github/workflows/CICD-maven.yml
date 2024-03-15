@@ -29,14 +29,15 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: Deploy
-      run: mvn clean package
-    - name: Publish artifacts
-      uses: actions/upload-artifact@v3
+      run: |
+           mvn clean install
+           mkdir artifacts && cp target/*.jar artifacts
+           cd artifacts && ls
+    - name: Save artifact
+      uses: actions/upload-artifact@v2
       with:
         name: coinmachine
-        path: ./target
+        path: artifacts
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
