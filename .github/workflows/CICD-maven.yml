@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: coinmachine
-        path: ./target/CoinMachine-0.0.2.jar
+        path: ./target
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
