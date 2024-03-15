@@ -34,8 +34,8 @@ jobs:
       run: cp config/settings.xml ~/.m2/
     - name: Deploy
       run: mvn clean deploy
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
