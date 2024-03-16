@@ -33,10 +33,10 @@ class CoinsController {
        
         List<String> listOfPeople = Arrays.asList("rightPerson", "leftPerson");
         
-        //To maintain the order in result
+        //To maintain the order in result that is why i choosed LinkedHashMap
         Map<String, Long> result = new LinkedHashMap<>();
 
-        // Initialize counters for 'P' added by each person in the previous iteration
+        // Initialize counters for 'P' and 'R' added by each person
         long rightPersonPCount = 0;
         long leftPersonPCount = 0;
         long rightPersonRCount = 0;
@@ -46,6 +46,7 @@ class CoinsController {
         for (String person : listOfPeople) {
             List<String> personList = person.equals("rightPerson") ? payload.getRightPerson() : payload.getLeftPerson();
             
+            //The count how many of each action was perfomed by each person
             if(person.equals("rightPerson")) {
             	rightPersonPCount =   countChars(personList,"P");
             	rightPersonRCount = countChars(personList,"R");
@@ -61,7 +62,8 @@ class CoinsController {
         long totalRight = countTotalChars(leftPersonPCount, rightPersonRCount, rightPersonPCount);
         
         long totalLeft = countTotalChars(rightPersonPCount, leftPersonRCount, leftPersonPCount);
-         
+        
+        //Put each person in the Map with is specif coins
         for(String person : listOfPeople) {
         	long total = person.equals("rightPerson") ? totalRight : totalLeft;
         	result.put(person, total);
@@ -70,7 +72,7 @@ class CoinsController {
         // Return the result map
         return result;
     }
-
+    //Tell how many coins in the end each person stays
 	private long countTotalChars(long Person1PCount, long Person2RCount, long Person2PCount) {
 		long total = 0;
 		if(Person1PCount >= Person2RCount) {
@@ -82,7 +84,7 @@ class CoinsController {
 		total = total +3;
 		return total < 0 ? 0 : total;
 	}
-	
+	//Count how of many times specif action happens
 	private long countChars(List<String> List, String letter) {
 		long countP = List.stream().filter(x -> x.equals(letter)).count();
 		return countP;
