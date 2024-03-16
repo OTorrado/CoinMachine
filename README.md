@@ -11,7 +11,7 @@ To run the project, it's quite simple. We just need to execute the command <code
 
 ## How To Test It
 
-We just need to go to [LocalHost](https://localhost:8080/coins) and send a payload containing the necessary information for each person.
+Execute the endpoint "/coins" on the localhost and send a payload containing the necessary information for each person.
 Example of a Payload:
 ```json
 {
@@ -19,8 +19,8 @@ Example of a Payload:
     "leftPerson": ["P","R","R"]
 }
 ```
-Then it will respond with how many coins each person gets in the end(remembering that each person starts with 3 coins).
-Expected Response:
+Then it will respond with how many coins each person gets at the end (remembering that each person starts with 3 coins).
+Expected response:
 ```json
 {
     "rightPerson": 4,
