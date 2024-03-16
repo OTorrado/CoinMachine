@@ -4,8 +4,6 @@ services:
       image: 'otorradinho/coinmachine:0.3'
       container_name: coinmachine
       restart: always
-      volumes:
-        - /Users/otorrado/Desktop/AsecoGithub/target/
       hostname: 'localhost'
       ports:
         - '8080:80'

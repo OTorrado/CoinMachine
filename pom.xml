@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.Asseco</groupId>
 	<artifactId>CoinMachine</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.1</version>
 	<name>CoinMachine</name>
 	<description>Project For Asseco, in proll of the Challenge</description>
 	<properties>
