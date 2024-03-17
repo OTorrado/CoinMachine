@@ -7,7 +7,7 @@ This project was conceived with the aim of fulfilling all the requirements propo
 
 ## How To Run The Project
 
-To run the project, we just need to execute the command <code>docker compose up</code> in the root of the project. This will pull the designated Docker image created specifically for this project (which resides on Docker Hub) and run the container, making the project available.
+To run the project, we just need to execute the command <code>docker compose up</code> in the root of the project. This will pull the designated Docker image created specifically for this project (which resides on Docker Hub) and run the container, making the project available. 
 
 ## How To Test It
 
