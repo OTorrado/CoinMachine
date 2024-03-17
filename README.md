@@ -27,3 +27,7 @@ Expected response:
     "leftPerson": 8
 }
 ```
+
+## How To Get The Artifact
+
+Whenever the project is pushed to the main branch, it runs the pipelines, executing a CI/CD process that, among other things, publishes the artifact to a public registry (in this case, on GitHub), thus allowing everyone to have access. All we need to do is go to the project's Actions on GitHub Repository, select the latest workflow run that was successfully completed, and the artifact will be available there at the end.
